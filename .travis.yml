@@ -4,6 +4,7 @@ compiler: gcc
 env:
   global:
     - INSTALL_PREFIX=/usr/local
+    - SOAPY_SDR_BRANCH=master
   matrix:
     - BUILD_TYPE=Debug
     - BUILD_TYPE=Release
@@ -18,6 +19,7 @@ install:
  # install SoapySDR from source
  - git clone https://github.com/pothosware/SoapySDR.git
  - pushd SoapySDR
+ - git checkout ${SOAPY_SDR_BRANCH}
  - mkdir build && cd build
  - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
  - make && sudo make install
