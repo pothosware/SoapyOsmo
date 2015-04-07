@@ -6,7 +6,6 @@
 
 ##Dependencies
 
-* CMake
 * Boost C++ libraries
 * SoapySDR - https://github.com/pothosware/SoapySDR/wiki
 * Various SDR device libraries for rtl, hackrf, bladerf
