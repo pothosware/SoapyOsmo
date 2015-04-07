@@ -1,4 +1,4 @@
-# Soapy Osmo - Soapy SDR plugins for Osmo SDR devices
+# Soapy SDR plugins for OsmoSDR devices
 
 ##Build Status
 
