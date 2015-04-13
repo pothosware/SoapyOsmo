@@ -1,6 +1,6 @@
-# Copyright 2012-2014 Free Software Foundation, Inc.
+# Copyright 2012-2015 Free Software Foundation, Inc.
 #
-# This file is part of GrOsmoSDR support modules
+# This file is part of SoapyOsmo support modules
 #
 # GNU Radio is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -275,7 +275,7 @@ function(GrOsmoSDRModule)
     include(SoapySDRUtil)
     include_directories(${CMAKE_CURRENT_SOURCE_DIR})
     SOAPY_SDR_MODULE_UTIL(
-        TARGET ${OSMO_MODULE_TARGET}Module
+        TARGET ${OSMO_MODULE_TARGET}Support
         SOURCES ${OSMO_MODULE_SOURCES}
         LIBRARIES ${OSMO_MODULE_LIBRARIES}
     )
