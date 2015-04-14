@@ -19,29 +19,36 @@ env:
     - BUILD_TYPE=Release
 
 before_install:
- # install a newer cmake since at this time Travis only has version 2.8.7
- - sudo add-apt-repository --yes ppa:kalakris/cmake
- # to get a more recent boost, since the 12.04 is missing chrono
- - sudo add-apt-repository --yes ppa:boost-latest/ppa
- - sudo apt-get update -qq
+  # install a newer cmake since at this time Travis only has version 2.8.7
+  - sudo add-apt-repository --yes ppa:kalakris/cmake
+  # to get a more recent boost, since the 12.04 is missing chrono
+  - sudo add-apt-repository --yes ppa:boost-latest/ppa
+  - sudo apt-get update -qq
 
 install:
- - sudo apt-get install -qq cmake
- - sudo apt-get install -q libboost-random1.55-dev libboost-date-time1.55-dev libboost-regex1.55-dev libboost-program-options1.55-dev libboost-signals1.55-dev libboost-system1.55-dev libboost-filesystem1.55-dev libboost-thread1.55-dev
- # install SoapySDR from source
- - git clone https://github.com/pothosware/SoapySDR.git
- - pushd SoapySDR
- - git checkout ${SOAPY_SDR_BRANCH}
- - mkdir build && cd build
- - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
- - make && sudo make install
- - popd
+  - sudo apt-get install -qq cmake libusb-1.0-0-dev
+  - sudo apt-get install -q libboost-random1.55-dev libboost-date-time1.55-dev libboost-regex1.55-dev libboost-program-options1.55-dev libboost-signals1.55-dev libboost-system1.55-dev libboost-filesystem1.55-dev libboost-thread1.55-dev
+  # install SoapySDR from source
+  - git clone https://github.com/pothosware/SoapySDR.git
+  - pushd SoapySDR
+  - git checkout ${SOAPY_SDR_BRANCH}
+  - mkdir build && cd build
+  - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - make && sudo make install
+  - popd
+  # install rtlsdr from source
+  - git clone git://git.osmocom.org/rtl-sdr.git
+  - pushd rtl-sdr
+  - mkdir build && cd build
+  - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - make && sudo make install
+  - popd
 
 script:
- - mkdir build && cd build
- - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
- - make && sudo make install
- # print info about the install
- - export LD_LIBRARY_PATH=${INSTALL_PREFIX}/lib:${LD_LIBRARY_PATH}
- - export PATH=${INSTALL_PREFIX}/bin:${PATH}
- - SoapySDRUtil --info
+  - mkdir build && cd build
+  - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - make && sudo make install
+  # print info about the install
+  - export LD_LIBRARY_PATH=${INSTALL_PREFIX}/lib:${LD_LIBRARY_PATH}
+  - export PATH=${INSTALL_PREFIX}/bin:${PATH}
+  - SoapySDRUtil --info
