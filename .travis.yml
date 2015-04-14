@@ -2,7 +2,7 @@
 ## Travis CI config for SoapyOsmo
 ##
 ## * installs SoapySDR from source
-## * no hardware drivers installed
+## * installs RTL SDR from source
 ## * confirms build and install
 ## * no unit tests
 ########################################################################
@@ -14,6 +14,7 @@ env:
   global:
     - INSTALL_PREFIX=/usr/local
     - SOAPY_SDR_BRANCH=master
+    - RTL_SDR_BRANCH=v0.5.3
   matrix:
     - BUILD_TYPE=Debug
     - BUILD_TYPE=Release
@@ -39,6 +40,7 @@ install:
   # install rtlsdr from source
   - git clone git://git.osmocom.org/rtl-sdr.git
   - pushd rtl-sdr
+  - git checkout ${RTL_SDR_BRANCH}
   - mkdir build && cd build
   - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
   - make && sudo make install
