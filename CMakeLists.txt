@@ -35,6 +35,13 @@ if(NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 
+# Set the version information here
+set(VERSION_INFO_MAJOR_VERSION 0)
+set(VERSION_INFO_API_COMPAT    1)
+set(VERSION_INFO_MINOR_VERSION 5)
+set(VERSION_INFO_MAINT_VERSION git)
+include(GrVersion) #setup version info
+
 find_package(SoapySDR CONFIG REQUIRED)
 
 ########################################################################
@@ -216,6 +223,7 @@ include_directories(${Boost_INCLUDE_DIRS})
 add_library(SoapyOsmoSDR SHARED ${osmosdr_srcs})
 target_link_libraries(SoapyOsmoSDR ${Boost_LIBRARIES} ${osmo_libraries})
 set_target_properties(SoapyOsmoSDR PROPERTIES DEFINE_SYMBOL "gnuradio_osmosdr_EXPORTS")
+set_target_properties(SoapyOsmoSDR PROPERTIES VERSION ${LIBVER})
 
 install(TARGETS SoapyOsmoSDR
     LIBRARY DESTINATION lib${LIB_SUFFIX} # .so file
@@ -368,4 +376,5 @@ endif(ENABLE_AIRSPY)
 # Print Summary
 ########################################################################
 GR_PRINT_COMPONENT_SUMMARY()
+MESSAGE(STATUS "Building for version: ${VERSION} / ${LIBVER}")
 MESSAGE(STATUS "Using install prefix: ${CMAKE_INSTALL_PREFIX}")
