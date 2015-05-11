@@ -20,6 +20,7 @@ Architecture: any
 Depends:
     libstdc++6,
     libboost-all-dev,
+    libsoapysdr0.2,
     ${shlibs:Depends},
     ${misc:Depends}
 Description: Soapy Osmo - shared library
