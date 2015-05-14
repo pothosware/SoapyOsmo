@@ -25,10 +25,11 @@ Description: Soapy Osmo - meta package
 
 Package: libsoapyosmo0
 Architecture: any
+Pre-Depends: multiarch-support, ${misc:Pre-Depends}
 Depends:
-    libstdc++6,
     ${shlibs:Depends},
     ${misc:Depends}
+Multi-Arch: same
 Description: Soapy Osmo - shared library
  Soapy SDR plugins for OsmoSDR devices
 
