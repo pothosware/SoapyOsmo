@@ -1,5 +1,5 @@
-soapyosmo (0.1.0+1SNAPSHOT-gitdescribe~unstable) unstable; urgency=low
+soapyosmo (0.1.0+1SNAPSHOT1431635881-g0a1d2d0d~trusty) trusty; urgency=low
 
   * Pending release (master branch)
 
- -- Josh Blum <josh@pothosware.com>  Sun, 10 May 2015 20:19:23 -0700
+ -- Josh Blum <josh@pothosware.com>  Thu, 14 May 2015 11:05:40 -0700
