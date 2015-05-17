@@ -8,5 +8,6 @@ Copyright:
     2012-2015 Dimitri Stolnikov <horiz0n@gmx.net>
     2010-2013 Ettus Research LLC
 License: GPL-3
- The full text of the GPL is distributed as COPYING in moreutils's source,
- and is distributed in /usr/share/common-licenses/GPL-3 on Debian systems.
+ On Debian systems, the full text of the GNU General Public
+ License version 3 can be found in the file
+ `/usr/share/common-licenses/GPL-3'.
