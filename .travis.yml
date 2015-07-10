@@ -19,11 +19,6 @@ env:
     - BUILD_TYPE=Debug
     - BUILD_TYPE=Release
 
-before_install:
-  # install a newer cmake since at this time Travis only has version 2.8.7
-  - sudo add-apt-repository --yes ppa:kalakris/cmake
-  - sudo apt-get update -qq
-
 install:
   - sudo apt-get install -qq cmake libusb-1.0-0-dev libboost-all-dev
   # install SoapySDR from source
