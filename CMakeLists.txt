@@ -20,7 +20,7 @@
 ########################################################################
 # Project setup
 ########################################################################
-cmake_minimum_required(VERSION 2.8.8)
+cmake_minimum_required(VERSION 2.8.7)
 project(SoapyOsmo CXX C)
 enable_testing()
 
@@ -38,7 +38,7 @@ set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 # Set the version information here
 set(VERSION "0.1.0")
 
-find_package(SoapySDR CONFIG REQUIRED)
+find_package(SoapySDR NO_MODULE REQUIRED)
 
 ########################################################################
 # Compiler specific setup
@@ -101,8 +101,6 @@ MESSAGE(STATUS "Configuring Boost C++ Libraries...")
 SET(BOOST_REQUIRED_COMPONENTS
     thread
     system
-    date_time
-    chrono
 )
 
 if(UNIX AND NOT BOOST_ROOT AND EXISTS "/usr/lib64")

@@ -22,13 +22,10 @@ env:
 before_install:
   # install a newer cmake since at this time Travis only has version 2.8.7
   - sudo add-apt-repository --yes ppa:kalakris/cmake
-  # to get a more recent boost, since the 12.04 is missing chrono
-  - sudo add-apt-repository --yes ppa:boost-latest/ppa
   - sudo apt-get update -qq
 
 install:
-  - sudo apt-get install -qq cmake libusb-1.0-0-dev
-  - sudo apt-get install -q libboost-random1.55-dev libboost-date-time1.55-dev libboost-regex1.55-dev libboost-program-options1.55-dev libboost-signals1.55-dev libboost-system1.55-dev libboost-filesystem1.55-dev libboost-thread1.55-dev
+  - sudo apt-get install -qq cmake libusb-1.0-0-dev libboost-all-dev
   # install SoapySDR from source
   - git clone https://github.com/pothosware/SoapySDR.git
   - pushd SoapySDR
