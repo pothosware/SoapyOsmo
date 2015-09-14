@@ -36,7 +36,7 @@ endif(NOT CMAKE_BUILD_TYPE)
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 
 # Set the version information here
-set(VERSION "0.1.1")
+set(VERSION "0.1.2")
 
 find_package(SoapySDR NO_MODULE REQUIRED)
 
@@ -345,7 +345,12 @@ endif(ENABLE_HACKRF)
 ########################################################################
 # Setup bladeRF component
 ########################################################################
-GR_REGISTER_COMPONENT("nuand bladeRF" ENABLE_BLADERF LIBBLADERF_FOUND)
+
+#soapy osmo bladerf deprecated, use soapy bladerf
+#https://github.com/pothosware/SoapyBladeRF/wiki
+option(USE_OSMO_BLADERF "Use bladerf through SoapyOsmo" OFF)
+
+GR_REGISTER_COMPONENT("nuand bladeRF" ENABLE_BLADERF LIBBLADERF_FOUND;USE_OSMO_BLADERF)
 if(ENABLE_BLADERF)
 GR_INCLUDE_SUBDIRECTORY(bladerf)
 endif(ENABLE_BLADERF)
