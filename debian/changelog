@@ -1,5 +1,6 @@
 soapyosmo (0.1.2) unstable; urgency=low
 
+  * Support device number filter keywords in device enumeration
   * Disable SoapyOsmo bladerf by default in favor of SoapyBladeRF
 
  -- Josh Blum <josh@pothosware.com>  Sun, 13 Sep 2015 20:22:27 -0700

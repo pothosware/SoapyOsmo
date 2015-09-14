@@ -23,6 +23,7 @@
 #include "GrOsmoSDRInterface.hpp"
 #include "arg_helpers.h"
 @LOCAL_INCLUDES@
+#include <cstdlib>
 
 static std::vector<SoapySDR::Kwargs> find__@TARGET@(const SoapySDR::Kwargs &args)
 {
@@ -43,7 +44,24 @@ static std::vector<SoapySDR::Kwargs> find__@TARGET@(const SoapySDR::Kwargs &args
     }
     #endif
 
-    return results;
+    //no device number specified, return all results
+    if (args.count("@TARGET@") == 0) return results;
+
+    //device number is used as a filter when specified
+    std::vector<SoapySDR::Kwargs> filteredResults;
+    const int devNum = atoi(args.at("@TARGET@").c_str());
+    for (size_t i = 0; i < results.size(); i++)
+    {
+        if (
+            results[i].count("@TARGET@") == 0 or //driver doesn't support filter
+            devNum == atoi(results[i].at("@TARGET@").c_str()) //or device match
+        )
+        {
+            filteredResults.push_back(results[i]);
+        }
+    }
+
+    return filteredResults;
 }
 
 static SoapySDR::Device *make__@TARGET@(const SoapySDR::Kwargs &args)
