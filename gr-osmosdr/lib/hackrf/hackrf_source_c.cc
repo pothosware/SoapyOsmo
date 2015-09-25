@@ -49,6 +49,10 @@ using namespace boost::assign;
 
 #define BYTES_PER_SAMPLE  2 /* HackRF device produces 8 bit unsigned IQ data */
 
+#define HACKRF_FORMAT_ERROR(ret) \
+  boost::str( boost::format("(%d) %s") \
+    % ret % hackrf_error_name((enum hackrf_error)ret) ) \
+
 #define HACKRF_THROW_ON_ERROR(ret, msg) \
   if ( ret != HACKRF_SUCCESS )  \
   throw std::runtime_error( boost::str( boost::format(msg " (%d) %s") \
@@ -98,6 +102,7 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
     _bandwidth(0)
 {
   int ret;
+  std::string hackrf_serial;
 
   dict_t dict = params_to_dict(args);
 
@@ -138,7 +143,36 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
   }
 
   _dev = NULL;
-  ret = hackrf_open( &_dev );
+  
+#ifdef LIBHACKRF_HAVE_DEVICE_LIST
+  if (dict.count("hackrf") && dict["hackrf"].length() > 0) {
+    hackrf_serial = dict["hackrf"];
+    
+    if (hackrf_serial.length() > 1) {
+      ret = hackrf_open_by_serial( hackrf_serial.c_str(), &_dev );
+    } else {
+        unsigned int dev_index = 0;
+        try {
+          dev_index = boost::lexical_cast< unsigned int >( hackrf_serial );
+        } catch ( std::exception &ex ) {
+          throw std::runtime_error(
+                "Failed to use '" + hackrf_serial + "' as HackRF device index number: " + ex.what());
+        }
+        
+        hackrf_device_list_t *list = hackrf_device_list();
+        if (dev_index < list->devicecount) {
+          ret = hackrf_device_list_open(list, dev_index, &_dev);
+        } else {
+          hackrf_device_list_free(list);
+          throw std::runtime_error(
+                "Failed to use '" + hackrf_serial + "' as HackRF device index: not enough devices");
+        }
+        hackrf_device_list_free(list);
+    }
+  } else
+#endif
+    ret = hackrf_open( &_dev );
+    
   HACKRF_THROW_ON_ERROR(ret, "Failed to open HackRF device")
 
   uint8_t board_id;
@@ -173,6 +207,20 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
   set_if_gain( 16 ); /* preset to a reasonable default (non-GRC use case) */
 
   set_bb_gain( 20 ); /* preset to a reasonable default (non-GRC use case) */
+
+  // Check device args to find out if bias/phantom power is desired.
+  if ( dict.count("bias") ) {
+    bool bias = boost::lexical_cast<bool>( dict["bias"] );
+    ret = hackrf_set_antenna_enable(_dev, static_cast<uint8_t>(bias));
+    if ( ret != HACKRF_SUCCESS )
+    {
+      std::cerr << "Failed to apply antenna bias voltage state: " << bias << " " << HACKRF_FORMAT_ERROR(ret) << std::endl;
+    }
+    else
+    {
+      std::cerr << (bias ? "Enabled" : "Disabled") << " antenna bias voltage" << std::endl;
+    }
+  }
 
   _buf = (unsigned short **) malloc(_buf_num * sizeof(unsigned short *));
 
@@ -343,21 +391,7 @@ std::vector<std::string> hackrf_source_c::get_devices()
 {
   std::vector<std::string> devices;
   std::string label;
-#if 0
-  for (unsigned int i = 0; i < 1 /* TODO: missing libhackrf api */; i++) {
-    std::string args = "hackrf=" + boost::lexical_cast< std::string >( i );
-
-    label.clear();
-
-    label = "HackRF Jawbreaker"; /* TODO: missing libhackrf api */
-
-    boost::algorithm::trim(label);
-
-    args += ",label='" + label + "'";
-    devices.push_back( args );
-  }
-#else
-
+  
   {
     boost::mutex::scoped_lock lock( _usage_mutex );
 
@@ -366,6 +400,32 @@ std::vector<std::string> hackrf_source_c::get_devices()
 
     _usage++;
   }
+
+#ifdef LIBHACKRF_HAVE_DEVICE_LIST
+  hackrf_device_list_t *list = hackrf_device_list();
+  
+  for (unsigned int i = 0; i < list->devicecount; i++) {
+    label = "HackRF ";
+    label += hackrf_usb_board_id_name( list->usb_board_ids[i] );
+    
+    std::string args;
+    if (list->serial_numbers[i]) {
+      std::string serial = boost::lexical_cast< std::string >( list->serial_numbers[i] );
+      if (serial.length() > 6)
+        serial = serial.substr(serial.length() - 6, 6);
+      args = "hackrf=" + serial;
+      label += " " + serial;
+    } else
+      args = "hackrf"; /* will pick the first one, serial number is required for choosing a specific one */
+
+    boost::algorithm::trim(label);
+
+    args += ",label='" + label + "'";
+    devices.push_back( args );
+  }
+  
+  hackrf_device_list_free(list);
+#else
 
   int ret;
   hackrf_device *dev = NULL;
@@ -389,6 +449,8 @@ std::vector<std::string> hackrf_source_c::get_devices()
     ret = hackrf_close(dev);
   }
 
+#endif
+
   {
     boost::mutex::scoped_lock lock( _usage_mutex );
 
@@ -398,7 +460,6 @@ std::vector<std::string> hackrf_source_c::get_devices()
       hackrf_exit(); /* call only once after last close */
   }
 
-#endif
   return devices;
 }
 
