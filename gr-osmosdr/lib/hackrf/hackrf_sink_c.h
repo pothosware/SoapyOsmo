@@ -34,6 +34,7 @@ class hackrf_sink_c;
 
   extern int _usage;
   extern boost::mutex _usage_mutex;
+  extern std::map<std::string, std::pair<int, hackrf_device *> > _deviceHandles;
 
 typedef struct circular_buffer
 {
@@ -147,6 +148,7 @@ private:
   double _amp_gain;
   double _vga_gain;
   double _bandwidth;
+  std::string _args;
 };
 
 #endif /* INCLUDED_HACKRF_SINK_C_H */

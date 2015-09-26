@@ -180,7 +180,11 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
   } else
 #endif
     printf("%s:%d -- hackrf_open\n", __func__, __LINE__);
-    ret = hackrf_open( &_dev );
+    if (_deviceHandles[args].first == 0) ret = hackrf_open( &_deviceHandles[args].second );
+    else ret = HACKRF_SUCCESS;
+    _dev = _deviceHandles[args].second;
+    _deviceHandles[args].first++;
+    _args = args;
     
   HACKRF_THROW_ON_ERROR(ret, "Failed to open HackRF device")
 
@@ -254,7 +258,9 @@ hackrf_source_c::~hackrf_source_c ()
     int ret = hackrf_stop_rx( _dev );
     HACKRF_THROW_ON_ERROR(ret, "Failed to stop RX streaming")
     printf("%s:%d -- hackrf_close\n", __func__, __LINE__);
-    ret = hackrf_close( _dev );
+    _deviceHandles[_args].first--;
+    if (_deviceHandles[_args].first == 0) ret = hackrf_close( _deviceHandles[_args].second );
+    else ret = HACKRF_SUCCESS;
     HACKRF_THROW_ON_ERROR(ret, "Failed to close HackRF")
     _dev = NULL;
 

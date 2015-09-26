@@ -36,6 +36,7 @@ class hackrf_source_c;
 
   extern int _usage;
   extern boost::mutex _usage_mutex;
+  extern std::map<std::string, std::pair<int, hackrf_device *> > _deviceHandles;
 
 /*
  * We use boost::shared_ptr's instead of raw pointers for all access
@@ -152,6 +153,7 @@ private:
   double _lna_gain;
   double _vga_gain;
   double _bandwidth;
+  std::string _args;
 };
 
 #endif /* INCLUDED_HACKRF_SOURCE_C_H */

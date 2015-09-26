@@ -130,6 +130,7 @@ static inline bool cb_pop_front(circular_buffer_t *cb, void *item)
 
 int _usage = 0;
 boost::mutex _usage_mutex;
+std::map<std::string, std::pair<int, hackrf_device *> > _deviceHandles;
 
 hackrf_sink_c_sptr make_hackrf_sink_c (const std::string & args)
 {
@@ -207,7 +208,11 @@ hackrf_sink_c::hackrf_sink_c (const std::string &args)
 #endif  
     {
     printf("%s:%d -- hackrf_open\n", __func__, __LINE__);
-    ret = hackrf_open( &_dev );
+    if (_deviceHandles[args].first == 0) ret = hackrf_open( &_deviceHandles[args].second );
+    else ret = HACKRF_SUCCESS;
+    _dev = _deviceHandles[args].second;
+    _deviceHandles[args].first++;
+    _args = args;
     }
   HACKRF_THROW_ON_ERROR(ret, "Failed to open HackRF device")
 
@@ -275,7 +280,9 @@ hackrf_sink_c::~hackrf_sink_c ()
     int ret = hackrf_stop_tx( _dev );
     HACKRF_THROW_ON_ERROR(ret, "Failed to stop TX streaming")
     printf("%s:%d -- hackrf_close\n", __func__, __LINE__);
-    ret = hackrf_close( _dev );
+    _deviceHandles[_args].first--;
+    if (_deviceHandles[_args].first == 0) ret = hackrf_close( _deviceHandles[_args].second );
+    else ret = HACKRF_SUCCESS;
     HACKRF_THROW_ON_ERROR(ret, "Failed to close HackRF")
     _dev = NULL;
 
