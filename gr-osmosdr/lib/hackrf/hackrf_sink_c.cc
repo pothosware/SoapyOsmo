@@ -277,7 +277,7 @@ hackrf_sink_c::~hackrf_sink_c ()
 {
   if (_dev) {
 //    _thread.join();
-    //int ret = hackrf_stop_tx( _dev );
+    int ret;// = hackrf_stop_tx( _dev );
     //HACKRF_THROW_ON_ERROR(ret, "Failed to stop TX streaming")
     printf("%s:%d -- hackrf_close\n", __func__, __LINE__);
     _deviceHandles[_args].first--;
