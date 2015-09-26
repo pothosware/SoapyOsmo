@@ -187,7 +187,10 @@ hackrf_sink_c::hackrf_sink_c (const std::string &args)
     boost::mutex::scoped_lock lock( _usage_mutex );
 
     if ( _usage == 0 )
+    {
+      printf("%s:%d -- hackrf_init", __func__, __LINE__);
       hackrf_init(); /* call only once before the first open */
+    }
 
     _usage++;
   }
@@ -195,10 +198,17 @@ hackrf_sink_c::hackrf_sink_c (const std::string &args)
   _dev = NULL;
 #ifdef LIBHACKRF_HAVE_DEVICE_LIST
   if ( hackrf_serial )
+  {
+    printf("%s:%d -- hackrf_open_by_serial", __func__, __LINE__);
     ret = hackrf_open_by_serial( hackrf_serial->c_str(), &_dev );
+  }
   else
+  //unterminated else here... probably a bug?
 #endif  
+    {
+    printf("%s:%d -- hackrf_open", __func__, __LINE__);
     ret = hackrf_open( &_dev );
+    }
   HACKRF_THROW_ON_ERROR(ret, "Failed to open HackRF device")
 
   uint8_t board_id;
@@ -264,6 +274,7 @@ hackrf_sink_c::~hackrf_sink_c ()
 //    _thread.join();
     int ret = hackrf_stop_tx( _dev );
     HACKRF_THROW_ON_ERROR(ret, "Failed to stop TX streaming")
+    printf("%s:%d -- hackrf_close", __func__, __LINE__);
     ret = hackrf_close( _dev );
     HACKRF_THROW_ON_ERROR(ret, "Failed to close HackRF")
     _dev = NULL;
@@ -274,7 +285,10 @@ hackrf_sink_c::~hackrf_sink_c ()
        _usage--;
 
       if ( _usage == 0 )
+      {
+        printf("%s:%d -- hackrf_exit", __func__, __LINE__);
         hackrf_exit(); /* call only once after last close */
+      }
     }
   }
 
@@ -481,12 +495,16 @@ std::vector<std::string> hackrf_sink_c::get_devices()
     boost::mutex::scoped_lock lock( _usage_mutex );
 
     if ( _usage == 0 )
+    {
+      printf("%s:%d -- hackrf_init", __func__, __LINE__);
       hackrf_init(); /* call only once before the first open */
+    }
 
     _usage++;
   }
 
 #ifdef LIBHACKRF_HAVE_DEVICE_LIST
+  printf("%s:%d -- hackrf_device_list", __func__, __LINE__);
   hackrf_device_list_t *list = hackrf_device_list();
   
   for (unsigned int i = 0; i < list->devicecount; i++) {
@@ -509,11 +527,13 @@ std::vector<std::string> hackrf_sink_c::get_devices()
     devices.push_back( args );
   }
   
+  printf("%s:%d -- hackrf_device_list_free", __func__, __LINE__);
   hackrf_device_list_free(list);
 #else
 
   int ret;
   hackrf_device *dev = NULL;
+  printf("%s:%d -- hackrf_open", __func__, __LINE__);
   ret = hackrf_open(&dev);
   if ( HACKRF_SUCCESS == ret )
   {
@@ -531,6 +551,7 @@ std::vector<std::string> hackrf_sink_c::get_devices()
     args += ",label='" + label + "'";
     devices.push_back( args );
 
+    printf("%s:%d -- hackrf_close", __func__, __LINE__);
     ret = hackrf_close(dev);
   }
 
@@ -542,7 +563,10 @@ std::vector<std::string> hackrf_sink_c::get_devices()
      _usage--;
 
     if ( _usage == 0 )
+    {
+      printf("%s:%d -- hackrf_exit", __func__, __LINE__);
       hackrf_exit(); /* call only once after last close */
+    }
   }
 
   return devices;
