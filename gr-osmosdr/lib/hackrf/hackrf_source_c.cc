@@ -244,8 +244,8 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
 
 //  _thread = gr::thread::thread(_hackrf_wait, this);
 
-  ret = hackrf_start_rx( _dev, _hackrf_rx_callback, (void *)this );
-  HACKRF_THROW_ON_ERROR(ret, "Failed to start RX streaming")
+  //ret = hackrf_start_rx( _dev, _hackrf_rx_callback, (void *)this );
+  //HACKRF_THROW_ON_ERROR(ret, "Failed to start RX streaming")
 }
 
 /*
@@ -255,8 +255,8 @@ hackrf_source_c::~hackrf_source_c ()
 {
   if (_dev) {
 //    _thread.join();
-    int ret = hackrf_stop_rx( _dev );
-    HACKRF_THROW_ON_ERROR(ret, "Failed to stop RX streaming")
+    //int ret = hackrf_stop_rx( _dev );
+    //HACKRF_THROW_ON_ERROR(ret, "Failed to stop RX streaming")
     printf("%s:%d -- hackrf_close\n", __func__, __LINE__);
     _deviceHandles[_args].first--;
     if (_deviceHandles[_args].first == 0) ret = hackrf_close( _deviceHandles[_args].second );
@@ -328,7 +328,7 @@ bool hackrf_source_c::start()
 {
   if ( ! _dev )
     return false;
-#if 0
+#if 1
   int ret = hackrf_start_rx( _dev, _hackrf_rx_callback, (void *)this );
   if ( ret != HACKRF_SUCCESS ) {
     std::cerr << "Failed to start RX streaming (" << ret << ")" << std::endl;
@@ -342,7 +342,7 @@ bool hackrf_source_c::stop()
 {
   if ( ! _dev )
     return false;
-#if 0
+#if 1
   int ret = hackrf_stop_rx( _dev );
   if ( ret != HACKRF_SUCCESS ) {
     std::cerr << "Failed to stop RX streaming (" << ret << ")" << std::endl;

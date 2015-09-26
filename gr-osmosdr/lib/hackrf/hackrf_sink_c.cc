@@ -266,8 +266,8 @@ hackrf_sink_c::hackrf_sink_c (const std::string &args)
 
 //  _thread = gr::thread::thread(_hackrf_wait, this);
 
-  ret = hackrf_start_tx( _dev, _hackrf_tx_callback, (void *)this );
-  HACKRF_THROW_ON_ERROR(ret, "Failed to start TX streaming")
+  //ret = hackrf_start_tx( _dev, _hackrf_tx_callback, (void *)this );
+  //HACKRF_THROW_ON_ERROR(ret, "Failed to start TX streaming")
 }
 
 /*
@@ -277,8 +277,8 @@ hackrf_sink_c::~hackrf_sink_c ()
 {
   if (_dev) {
 //    _thread.join();
-    int ret = hackrf_stop_tx( _dev );
-    HACKRF_THROW_ON_ERROR(ret, "Failed to stop TX streaming")
+    //int ret = hackrf_stop_tx( _dev );
+    //HACKRF_THROW_ON_ERROR(ret, "Failed to stop TX streaming")
     printf("%s:%d -- hackrf_close\n", __func__, __LINE__);
     _deviceHandles[_args].first--;
     if (_deviceHandles[_args].first == 0) ret = hackrf_close( _deviceHandles[_args].second );
@@ -349,7 +349,7 @@ bool hackrf_sink_c::start()
     return false;
 
   _buf_used = 0;
-#if 0
+#if 1
   int ret = hackrf_start_tx( _dev, _hackrf_tx_callback, (void *)this );
   if ( ret != HACKRF_SUCCESS ) {
     std::cerr << "Failed to start TX streaming (" << ret << ")" << std::endl;
@@ -363,7 +363,7 @@ bool hackrf_sink_c::stop()
 {
   if ( ! _dev )
     return false;
-#if 0
+#if 1
   int ret = hackrf_stop_tx( _dev );
   if ( ret != HACKRF_SUCCESS ) {
     std::cerr << "Failed to stop TX streaming (" << ret << ")" << std::endl;
