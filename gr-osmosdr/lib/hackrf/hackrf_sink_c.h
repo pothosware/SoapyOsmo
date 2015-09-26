@@ -32,6 +32,9 @@
 
 class hackrf_sink_c;
 
+  extern int _usage;
+  extern boost::mutex _usage_mutex;
+
 typedef struct circular_buffer
 {
   void *buffer;     // data buffer
@@ -126,9 +129,6 @@ private:
   int hackrf_tx_callback(unsigned char *buffer, uint32_t length);
   static void _hackrf_wait(hackrf_sink_c *obj);
   void hackrf_wait();
-
-  static int _usage;
-  static boost::mutex _usage_mutex;
 
   hackrf_device *_dev;
 //  gr::thread::thread _thread;

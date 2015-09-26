@@ -34,6 +34,9 @@
 
 class hackrf_source_c;
 
+  extern int _usage;
+  extern boost::mutex _usage_mutex;
+
 /*
  * We use boost::shared_ptr's instead of raw pointers for all access
  * to gr::blocks (and many other data structures).  The shared_ptr gets
@@ -125,9 +128,6 @@ private:
   int hackrf_rx_callback(unsigned char *buf, uint32_t len);
   static void _hackrf_wait(hackrf_source_c *obj);
   void hackrf_wait();
-
-  static int _usage;
-  static boost::mutex _usage_mutex;
 
   std::vector<gr_complex> _lut;
 

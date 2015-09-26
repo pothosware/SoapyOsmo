@@ -61,8 +61,8 @@ using namespace boost::assign;
 #define HACKRF_FUNC_STR(func, arg) \
   boost::str(boost::format(func "(%d)") % arg) + " has failed"
 
-int hackrf_source_c::_usage = 0;
-boost::mutex hackrf_source_c::_usage_mutex;
+//int hackrf_source_c::_usage = 0;
+//boost::mutex hackrf_source_c::_usage_mutex;
 
 hackrf_source_c_sptr make_hackrf_source_c (const std::string & args)
 {

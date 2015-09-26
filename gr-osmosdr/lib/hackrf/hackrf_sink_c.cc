@@ -128,8 +128,8 @@ static inline bool cb_pop_front(circular_buffer_t *cb, void *item)
   return true;
 }
 
-int hackrf_sink_c::_usage = 0;
-boost::mutex hackrf_sink_c::_usage_mutex;
+int _usage = 0;
+boost::mutex _usage_mutex;
 
 hackrf_sink_c_sptr make_hackrf_sink_c (const std::string & args)
 {
