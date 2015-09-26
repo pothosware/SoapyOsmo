@@ -138,7 +138,7 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
 
     if ( _usage == 0 )
     {
-      printf("%s:%d -- hackrf_init", __func__, __LINE__);
+      printf("%s:%d -- hackrf_init\n", __func__, __LINE__);
       hackrf_init(); /* call only once before the first open */
     }
 
@@ -152,7 +152,7 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
     hackrf_serial = dict["hackrf"];
     
     if (hackrf_serial.length() > 1) {
-      printf("%s:%d -- hackrf_open_by_serial", __func__, __LINE__);
+      printf("%s:%d -- hackrf_open_by_serial\n", __func__, __LINE__);
       ret = hackrf_open_by_serial( hackrf_serial.c_str(), &_dev );
     } else {
         unsigned int dev_index = 0;
@@ -163,23 +163,23 @@ hackrf_source_c::hackrf_source_c (const std::string &args)
                 "Failed to use '" + hackrf_serial + "' as HackRF device index number: " + ex.what());
         }
         
-        printf("%s:%d -- hackrf_device_list", __func__, __LINE__);
+        printf("%s:%d -- hackrf_device_list\n", __func__, __LINE__);
         hackrf_device_list_t *list = hackrf_device_list();
         if (dev_index < list->devicecount) {
-          printf("%s:%d -- hackrf_device_list_open", __func__, __LINE__);
+          printf("%s:%d -- hackrf_device_list_open\n", __func__, __LINE__);
           ret = hackrf_device_list_open(list, dev_index, &_dev);
         } else {
-          printf("%s:%d -- hackrf_device_list_free", __func__, __LINE__);
+          printf("%s:%d -- hackrf_device_list_free\n", __func__, __LINE__);
           hackrf_device_list_free(list);
           throw std::runtime_error(
                 "Failed to use '" + hackrf_serial + "' as HackRF device index: not enough devices");
         }
-        printf("%s:%d -- hackrf_device_list_free", __func__, __LINE__);
+        printf("%s:%d -- hackrf_device_list_free\n", __func__, __LINE__);
         hackrf_device_list_free(list);
     }
   } else
 #endif
-    printf("%s:%d -- hackrf_open", __func__, __LINE__);
+    printf("%s:%d -- hackrf_open\n", __func__, __LINE__);
     ret = hackrf_open( &_dev );
     
   HACKRF_THROW_ON_ERROR(ret, "Failed to open HackRF device")
@@ -253,7 +253,7 @@ hackrf_source_c::~hackrf_source_c ()
 //    _thread.join();
     int ret = hackrf_stop_rx( _dev );
     HACKRF_THROW_ON_ERROR(ret, "Failed to stop RX streaming")
-    printf("%s:%d -- hackrf_close", __func__, __LINE__);
+    printf("%s:%d -- hackrf_close\n", __func__, __LINE__);
     ret = hackrf_close( _dev );
     HACKRF_THROW_ON_ERROR(ret, "Failed to close HackRF")
     _dev = NULL;
@@ -265,7 +265,7 @@ hackrf_source_c::~hackrf_source_c ()
 
       if ( _usage == 0 )
       {
-        printf("%s:%d -- hackrf_exit", __func__, __LINE__);
+        printf("%s:%d -- hackrf_exit\n", __func__, __LINE__);
         hackrf_exit(); /* call only once after last close */
     }
     }
@@ -411,7 +411,7 @@ std::vector<std::string> hackrf_source_c::get_devices()
     if ( _usage == 0 )
     {
         
-      printf("%s:%d -- hackrf_init", __func__, __LINE__);
+      printf("%s:%d -- hackrf_init\n", __func__, __LINE__);
       hackrf_init(); /* call only once before the first open */
     }
 
@@ -446,7 +446,7 @@ std::vector<std::string> hackrf_source_c::get_devices()
 
   int ret;
   hackrf_device *dev = NULL;
-  printf("%s:%d -- hackrf_open", __func__, __LINE__);
+  printf("%s:%d -- hackrf_open\n", __func__, __LINE__);
   ret = hackrf_open(&dev);
   if ( HACKRF_SUCCESS == ret )
   {
@@ -464,7 +464,7 @@ std::vector<std::string> hackrf_source_c::get_devices()
     args += ",label='" + label + "'";
     devices.push_back( args );
 
-    printf("%s:%d -- hackrf_close", __func__, __LINE__);
+    printf("%s:%d -- hackrf_close\n", __func__, __LINE__);
     ret = hackrf_close(dev);
   }
 
@@ -477,7 +477,7 @@ std::vector<std::string> hackrf_source_c::get_devices()
 
     if ( _usage == 0 )
     {
-      printf("%s:%d -- hackrf_exit", __func__, __LINE__);
+      printf("%s:%d -- hackrf_exit\n", __func__, __LINE__);
       hackrf_exit(); /* call only once after last close */
     }
   }
