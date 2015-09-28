@@ -1,5 +1,6 @@
 soapyosmo (0.1.2) unstable; urgency=low
 
+  * Disable SoapyOsmo hackrf by default in favor of SoapyHackRF
   * Update internal copy of gr-osmosdr to 86ad5842
   * Support device number filter keywords in device enumeration
   * Disable SoapyOsmo bladerf by default in favor of SoapyBladeRF

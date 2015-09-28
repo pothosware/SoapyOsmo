@@ -337,7 +337,12 @@ endif(ENABLE_MIRI)
 ########################################################################
 # Setup HackRF component
 ########################################################################
-GR_REGISTER_COMPONENT("HackRF Jawbreaker" ENABLE_HACKRF LIBHACKRF_FOUND)
+
+#soapy osmo bladerf deprecated, use soapy hackrf
+#https://github.com/pothosware/SoapyHackRF/wiki
+option(USE_OSMO_HACKRF "Use hackrf through SoapyOsmo" OFF)
+
+GR_REGISTER_COMPONENT("HackRF Jawbreaker" ENABLE_HACKRF LIBHACKRF_FOUND;USE_OSMO_HACKRF)
 if(ENABLE_HACKRF)
 GR_INCLUDE_SUBDIRECTORY(hackrf)
 endif(ENABLE_HACKRF)
