@@ -214,6 +214,7 @@ While primarily being developed for the OsmoSDR hardware, this block as well sup
  * RTL2832U based DVB-T dongles through librtlsdr
  * RTL-TCP spectrum server (see librtlsdr project)
  * MSi2500 based DVB-T dongles through libmirisdr
+ * SDRplay RSP devices through SDRplay library
  * gnuradio .cfile input through libgnuradio-blocks
  * RFSPACE SDR-IQ, SDR-IP, NetSDR (incl. X2 option)
  * AirSpy Wideband Receiver through libairspy
@@ -252,7 +253,7 @@ Lines ending with ... mean it's possible to bind devices together by specifying 
   sdr-iq=/dev/ttyUSB0
   airspy=0[,bias=0|1]
 #end if
-  hackrf=0[,buffers=32]
+  hackrf=0[,buffers=32][,bias=0|1][,bias_tx=0|1]
   bladerf=0[,fpga='/path/to/the/bitstream.rbf']
   uhd[,serial=...][,lo_offset=0][,mcr=52e6][,nchan=2][,subdev='\\\\'B:0 A:0\\\\''] ...
 
