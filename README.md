@@ -8,7 +8,7 @@
 
 * Boost C++ libraries
 * SoapySDR - https://github.com/pothosware/SoapySDR/wiki
-* Various SDR device libraries for mirisdr, rfspace, airspy
+* SDR device libraries for osmosdr, mirisdr, rfspace, airspy
 
 ##Documentation
 
