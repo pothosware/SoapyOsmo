@@ -321,7 +321,12 @@ include(GrComponent)
 ########################################################################
 # Setup RTL component
 ########################################################################
-GR_REGISTER_COMPONENT("Osmocom RTLSDR" ENABLE_RTL LIBRTLSDR_FOUND)
+
+#soapy osmo rtlsdr deprecated, use soapy RTL-SDR
+#https://github.com/pothosware/SoapyRTLSDR/wiki
+option(USE_OSMO_RTLSDR "Use rtlsdr through SoapyOsmo" OFF)
+
+GR_REGISTER_COMPONENT("Osmocom RTLSDR" ENABLE_RTL LIBRTLSDR_FOUND;USE_OSMO_RTLSDR)
 if(ENABLE_RTL)
 GR_INCLUDE_SUBDIRECTORY(rtl)
 endif(ENABLE_RTL)
