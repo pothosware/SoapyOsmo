@@ -11,6 +11,7 @@ Build-Depends:
     libosmosdr-dev,
     librtlsdr-dev,
     libmirisdr-dev,
+    libairspy-dev,
     libsoapysdr-dev
 Standards-Version: 3.9.5
 Homepage: https://github.com/pothosware/SoapyOsmo/wiki
@@ -89,4 +90,15 @@ Depends:
     ${shlibs:Depends},
     ${misc:Depends}
 Description: Soapy Osmo - Mirics SDR module
+ Soapy SDR plugins for OsmoSDR devices
+
+Package: soapyosmo-airspy
+Section: libs
+Architecture: any
+Depends:
+    libsoapyosmo0 (= ${binary:Version}),
+    ${misc:Pre-Depends},
+    ${shlibs:Depends},
+    ${misc:Depends}
+Description: Soapy Osmo - Airspy module
  Soapy SDR plugins for OsmoSDR devices
