@@ -8,6 +8,7 @@ Build-Depends:
     libboost-all-dev,
     libbladerf-dev,
     libhackrf-dev,
+    libosmosdr-dev,
     librtlsdr-dev,
     libmirisdr-dev,
     libsoapysdr-dev
@@ -44,6 +45,17 @@ Depends:
     ${shlibs:Depends},
     ${misc:Depends}
 Description: Soapy Osmo - hackRF module
+ Soapy SDR plugins for OsmoSDR devices
+
+Package: soapyosmo-osmosdr
+Section: libs
+Architecture: any
+Depends:
+    libsoapyosmo0 (= ${binary:Version}),
+    ${misc:Pre-Depends},
+    ${shlibs:Depends},
+    ${misc:Depends}
+Description: Soapy Osmo - Osmo SDR module
  Soapy SDR plugins for OsmoSDR devices
 
 Package: soapyosmo-rtlsdr

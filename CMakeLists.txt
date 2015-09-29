@@ -319,6 +319,14 @@ endfunction(GR_INCLUDE_SUBDIRECTORY)
 include(GrComponent)
 
 ########################################################################
+# Setup OsmoSDR component
+########################################################################
+GR_REGISTER_COMPONENT("sysmocom OsmoSDR" ENABLE_OSMOSDR LIBOSMOSDR_FOUND)
+if(ENABLE_OSMOSDR)
+GR_INCLUDE_SUBDIRECTORY(osmosdr)
+endif(ENABLE_OSMOSDR)
+
+########################################################################
 # Setup RTL component
 ########################################################################
 
