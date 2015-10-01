@@ -6,10 +6,7 @@ Build-Depends:
     debhelper (>= 9.0.0),
     cmake,
     libboost-all-dev,
-    libbladerf-dev,
-    libhackrf-dev,
     libosmosdr-dev,
-    librtlsdr-dev,
     libmirisdr-dev,
     libairspy-dev,
     libsoapysdr-dev
@@ -26,28 +23,6 @@ Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Soapy Osmo - shared library
  Soapy SDR plugins for OsmoSDR devices
 
-Package: soapyosmo-bladerf
-Section: libs
-Architecture: any
-Depends:
-    libsoapyosmo0 (= ${binary:Version}),
-    ${misc:Pre-Depends},
-    ${shlibs:Depends},
-    ${misc:Depends}
-Description: Soapy Osmo - bladeRF module
- Soapy SDR plugins for OsmoSDR devices
-
-Package: soapyosmo-hackrf
-Section: libs
-Architecture: any
-Depends:
-    libsoapyosmo0 (= ${binary:Version}),
-    ${misc:Pre-Depends},
-    ${shlibs:Depends},
-    ${misc:Depends}
-Description: Soapy Osmo - hackRF module
- Soapy SDR plugins for OsmoSDR devices
-
 Package: soapyosmo-osmosdr
 Section: libs
 Architecture: any
@@ -57,17 +32,6 @@ Depends:
     ${shlibs:Depends},
     ${misc:Depends}
 Description: Soapy Osmo - Osmo SDR module
- Soapy SDR plugins for OsmoSDR devices
-
-Package: soapyosmo-rtlsdr
-Section: libs
-Architecture: any
-Depends:
-    libsoapyosmo0 (= ${binary:Version}),
-    ${misc:Pre-Depends},
-    ${shlibs:Depends},
-    ${misc:Depends}
-Description: Soapy Osmo - RTL SDR module
  Soapy SDR plugins for OsmoSDR devices
 
 Package: soapyosmo-rfspace
