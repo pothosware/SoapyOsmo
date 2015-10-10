@@ -36,7 +36,7 @@ endif(NOT CMAKE_BUILD_TYPE)
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 
 # Set the version information here
-set(VERSION "0.1.2")
+set(VERSION "0.2.0")
 
 find_package(SoapySDR NO_MODULE REQUIRED)
 

@@ -1,4 +1,4 @@
-soapyosmo (0.1.2) unstable; urgency=low
+soapyosmo (0.2.0) unstable; urgency=low
 
   * Added airspy suppport to debian packaging
   * Added support for osmo-sdr device driver
@@ -8,7 +8,7 @@ soapyosmo (0.1.2) unstable; urgency=low
   * Support device number filter keywords in device enumeration
   * Disable SoapyOsmo bladerf by default in favor of SoapyBladeRF
 
- -- Josh Blum <josh@pothosware.com>  Sun, 13 Sep 2015 20:22:27 -0700
+ -- Josh Blum <josh@pothosware.com>  Sat, 10 Oct 2015 11:22:42 -0700
 
 soapyosmo (0.1.1) unstable; urgency=low
 
