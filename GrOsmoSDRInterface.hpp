@@ -125,6 +125,19 @@ public:
     /*******************************************************************
      * Stream support
      ******************************************************************/
+    std::vector<std::string> getStreamFormats(const int, const size_t) const
+    {
+        std::vector<std::string> formats;
+        formats.push_back("CF32");
+        return formats;
+    }
+
+    std::string getNativeStreamFormat(const int, const size_t, double &fullScale) const
+    {
+        fullScale = 1.0;
+        return "CF32";
+    }
+
     SoapySDR::Stream *setupStream(const int dir, const std::string &format, const std::vector<size_t> &, const SoapySDR::Kwargs &)
     {
         if (format != "CF32") throw std::runtime_error("GrOsmoSDRStreamer only supports format CF32");
