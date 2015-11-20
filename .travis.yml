@@ -1,11 +1,14 @@
 ########################################################################
 ## Travis CI config for SoapyOsmo
 ##
+## * installs RTL, Osmo, and Airspy
 ## * installs SoapySDR from source
-## * installs RTL SDR from source
 ## * confirms build and install
 ## * no unit tests
 ########################################################################
+
+sudo: required
+dist: trusty
 
 language: cpp
 compiler: gcc
@@ -19,22 +22,30 @@ env:
     - BUILD_TYPE=Debug
     - BUILD_TYPE=Release
 
+before_install:
+  # regular ubuntu packages
+  - sudo add-apt-repository main
+  - sudo add-apt-repository universe
+
+  # driver development files from ppa
+  - sudo add-apt-repository -y ppa:myriadrf/drivers
+
+  # update after package changes
+  - sudo apt-get update
+
 install:
-  - sudo apt-get install -qq cmake libusb-1.0-0-dev libboost-all-dev
+  #boost development files
+  - sudo apt-get install -qq libboost-all-dev
+
+  #sdr development files
+  - sudo apt-get install -qq libosmosdr-dev libmirisdr-dev libairspy-dev
+
   # install SoapySDR from source
   - git clone https://github.com/pothosware/SoapySDR.git
   - pushd SoapySDR
   - git checkout ${SOAPY_SDR_BRANCH}
   - mkdir build && cd build
-  - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
-  - make && sudo make install
-  - popd
-  # install rtlsdr from source
-  - git clone git://git.osmocom.org/rtl-sdr.git
-  - pushd rtl-sdr
-  - git checkout ${RTL_SDR_BRANCH}
-  - mkdir build && cd build
-  - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE}
+  - cmake ../ -DCMAKE_INSTALL_PREFIX=${INSTALL_PREFIX} -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -DENABLE_PYTHON=OFF -DENABLE_PYTHON3=OFF
   - make && sudo make install
   - popd
 
