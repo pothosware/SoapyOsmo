@@ -4,7 +4,7 @@
 ## * installs Miri, Osmo, and Airspy
 ## * installs SoapySDR from source
 ## * confirms build and install
-## * no unit tests
+## * checks that drivers load
 ########################################################################
 
 sudo: required
@@ -56,3 +56,7 @@ script:
   - export LD_LIBRARY_PATH=${INSTALL_PREFIX}/lib:${LD_LIBRARY_PATH}
   - export PATH=${INSTALL_PREFIX}/bin:${PATH}
   - SoapySDRUtil --info
+  - SoapySDRUtil --check=airspy
+  - SoapySDRUtil --check=miri
+  - SoapySDRUtil --check=osmosdr
+  - SoapySDRUtil --check=rfspace
