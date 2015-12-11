@@ -36,7 +36,8 @@ endif(NOT CMAKE_BUILD_TYPE)
 set(CMAKE_BUILD_TYPE ${CMAKE_BUILD_TYPE} CACHE STRING "")
 
 # Set the version information here
-set(VERSION "0.2.0")
+set(VERSION "0.2.2")
+set(SOVERSION 0)
 
 find_package(SoapySDR NO_MODULE REQUIRED)
 
@@ -218,6 +219,7 @@ add_library(SoapyOsmoSDR SHARED ${osmosdr_srcs})
 target_link_libraries(SoapyOsmoSDR ${Boost_LIBRARIES} ${osmo_libraries})
 set_target_properties(SoapyOsmoSDR PROPERTIES DEFINE_SYMBOL "gnuradio_osmosdr_EXPORTS")
 set_target_properties(SoapyOsmoSDR PROPERTIES VERSION ${VERSION})
+set_target_properties(SoapyOsmoSDR PROPERTIES SOVERSION ${SOVERSION})
 
 install(TARGETS SoapyOsmoSDR
     LIBRARY DESTINATION lib${LIB_SUFFIX} # .so file
