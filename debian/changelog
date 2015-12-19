@@ -1,6 +1,6 @@
 soapyosmo (0.2.2) unstable; urgency=low
 
-  * Update internal copy of gr-osmosdr to 7cec4c0f
+  * Update internal copy of gr-osmosdr to 55fe961
 
  -- Josh Blum <josh@pothosware.com>  Fri, 11 Dec 2015 02:07:11 -0800
 
