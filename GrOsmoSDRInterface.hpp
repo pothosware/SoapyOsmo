@@ -63,8 +63,17 @@ public:
         _block->_consumed_total = 0; //clear consumed
         _input_items.assign(buffs, buffs+_output_items.size());
         int ret = _block->work(numElems, _input_items, _output_items);
+
+        //unknown error code returned
+        if (ret < 0) return SOAPY_SDR_STREAM_ERROR;
+
+        //the work API used consume()
+        if (ret == 0) ret = _block->_consumed_total;
+
+        //no samples consumed, this is a timeout
         if (ret == 0) return SOAPY_SDR_TIMEOUT;
-        return (ret < 0)? ret : _block->_consumed_total;
+
+        return ret;
     }
 
 private:
