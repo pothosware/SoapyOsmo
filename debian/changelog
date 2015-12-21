@@ -1,7 +1,8 @@
 soapyosmo (0.2.2) unstable; urgency=low
 
+  * Added RedPitaya build support (off by default)
   * Fixed write() implementation when sinks use consume()
-  * Update internal copy of gr-osmosdr to 55fe961
+  * Update internal copy of gr-osmosdr to 810a981d
 
  -- Josh Blum <josh@pothosware.com>  Fri, 11 Dec 2015 02:07:11 -0800
 

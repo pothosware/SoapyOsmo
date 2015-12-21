@@ -392,6 +392,18 @@ GR_INCLUDE_SUBDIRECTORY(airspy)
 endif(ENABLE_AIRSPY)
 
 ########################################################################
+# Setup Red Pitaya component
+########################################################################
+
+#https://github.com/pavel-demin/red-pitaya-notes/tree/develop/projects/sdr_transceiver/SoapyRedPitaya
+option(USE_OSMO_REDPITAYA "Use redpitaya through SoapyRedPitaya" OFF)
+
+GR_REGISTER_COMPONENT("Red Pitaya SDR" ENABLE_REDPITAYA USE_OSMO_REDPITAYA)
+if(ENABLE_REDPITAYA)
+GR_INCLUDE_SUBDIRECTORY(redpitaya)
+endif(ENABLE_REDPITAYA)
+
+########################################################################
 # Print Summary
 ########################################################################
 GR_PRINT_COMPONENT_SUMMARY()
