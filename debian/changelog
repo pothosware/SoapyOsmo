@@ -4,7 +4,7 @@ soapyosmo (0.2.2) unstable; urgency=low
   * Fixed write() implementation when sinks use consume()
   * Update internal copy of gr-osmosdr to 810a981d
 
- -- Josh Blum <josh@pothosware.com>  Fri, 11 Dec 2015 02:07:11 -0800
+ -- Josh Blum <josh@pothosware.com>  Wed, 30 Dec 2015 14:00:13 -0800
 
 soapyosmo (0.2.1) unstable; urgency=low
 
