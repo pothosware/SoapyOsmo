@@ -1,3 +1,9 @@
+soapyosmo (0.2.3) unstable; urgency=low
+
+  * Update internal copy of gr-osmosdr to ac15e789
+
+ -- Josh Blum <josh@pothosware.com>  Fri, 15 Jan 2016 16:37:36 -0800
+
 soapyosmo (0.2.2) unstable; urgency=low
 
   * Added RedPitaya build support (off by default)
