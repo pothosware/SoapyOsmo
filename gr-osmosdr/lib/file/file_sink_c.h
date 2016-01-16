@@ -1,6 +1,5 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2015 Pavel Demin
  * Copyright 2012 Dimitri Stolnikov <horiz0n@gmx.net>
  *
  * GNU Radio is free software; you can redistribute it and/or modify
@@ -18,36 +17,32 @@
  * the Free Software Foundation, Inc., 51 Franklin Street,
  * Boston, MA 02110-1301, USA.
  */
-#ifndef REDPITAYA_SOURCE_C_H
-#define REDPITAYA_SOURCE_C_H
+#ifndef FILE_SINK_C_H
+#define FILE_SINK_C_H
 
-#include <gnuradio/sync_block.h>
+#include <gnuradio/hier_block2.h>
+#include <gnuradio/blocks/file_sink.h>
+#include <gnuradio/blocks/throttle.h>
 
-#include "source_iface.h"
+#include "sink_iface.h"
 
-#include "redpitaya_common.h"
+class file_sink_c;
 
-class redpitaya_source_c;
+typedef boost::shared_ptr< file_sink_c > file_sink_c_sptr;
 
-typedef boost::shared_ptr< redpitaya_source_c > redpitaya_source_c_sptr;
+file_sink_c_sptr make_file_sink_c( const std::string & args = "" );
 
-redpitaya_source_c_sptr make_redpitaya_source_c( const std::string & args = "" );
-
-class redpitaya_source_c :
-    public gr::sync_block,
-    public source_iface
+class file_sink_c :
+    public gr::hier_block2,
+    public sink_iface
 {
 private:
-  friend redpitaya_source_c_sptr make_redpitaya_source_c(const std::string &args);
+  friend file_sink_c_sptr make_file_sink_c(const std::string &args);
 
-  redpitaya_source_c(const std::string &args);
+  file_sink_c(const std::string &args);
 
 public:
-  ~redpitaya_source_c();
-
-  int work( int noutput_items,
-            gr_vector_const_void_star &input_items,
-            gr_vector_void_star &output_items );
+  ~file_sink_c();
 
   std::string name();
 
@@ -78,8 +73,10 @@ public:
   std::string get_antenna( size_t chan = 0 );
 
 private:
-  double _freq, _rate, _corr;
-  SOCKET _sockets[2];
+  gr::blocks::file_sink::sptr _sink;
+  gr::blocks::throttle::sptr _throttle;
+  double _file_rate;
+  double _freq, _rate;
 };
 
-#endif // REDPITAYA_SOURCE_C_H
+#endif // FILE_SINK_C_H
