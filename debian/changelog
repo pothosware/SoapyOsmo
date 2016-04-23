@@ -1,40 +1,24 @@
-soapyosmo (0.2.3) unstable; urgency=low
-
-  * Update internal copy of gr-osmosdr to ac15e789
-
- -- Josh Blum <josh@pothosware.com>  Fri, 15 Jan 2016 16:37:36 -0800
-
 soapyosmo (0.2.2) unstable; urgency=low
 
-  * Added RedPitaya build support (off by default)
-  * Fixed write() implementation when sinks use consume()
-  * Update internal copy of gr-osmosdr to 810a981d
+  * Release 0.2.2 (2015-12-30)
 
  -- Josh Blum <josh@pothosware.com>  Wed, 30 Dec 2015 14:00:13 -0800
 
 soapyosmo (0.2.1) unstable; urgency=low
 
-  * Implement getStreamFormats() for SoapySDR v0.4
-  * Implement getNativeStreamFormat() for SoapySDR v0.4
+  * Release 0.2.1 (2015-10-23)
 
  -- Josh Blum <josh@pothosware.com>  Fri, 23 Oct 2015 17:49:43 -0700
 
 soapyosmo (0.2.0) unstable; urgency=low
 
-  * Added airspy suppport to debian packaging
-  * Added support for osmo-sdr device driver
-  * Disable SoapyOsmo rtlsdr by default in favor of SoapyRTLSDR
-  * Disable SoapyOsmo hackrf by default in favor of SoapyHackRF
-  * Update internal copy of gr-osmosdr to 86ad5842
-  * Support device number filter keywords in device enumeration
-  * Disable SoapyOsmo bladerf by default in favor of SoapyBladeRF
+  * Release 0.2.0 (2015-10-10)
 
  -- Josh Blum <josh@pothosware.com>  Sat, 10 Oct 2015 11:22:42 -0700
 
 soapyosmo (0.1.1) unstable; urgency=low
 
-  * Modifications for ubuntu 12.04 w/ cmake 2.8.7
-  * Support debian package build for mirisdr module
+  * Release 0.1.1 (2015-08-15)
 
  -- Josh Blum <josh@pothosware.com>  Sat, 15 Aug 2015 11:29:46 -0700
 
