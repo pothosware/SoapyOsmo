@@ -1,4 +1,4 @@
-Release 0.2.3 (pending)
+Release 0.2.3 (2016-04-25)
 ==========================
 
 - Update internal copy of gr-osmosdr to 164a09fc
