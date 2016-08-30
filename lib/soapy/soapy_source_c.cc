@@ -1,6 +1,6 @@
 /* -*- c++ -*- */
 /*
- * Copyright 2015 Josh Blum <josh@joshknows.com>
+ * Copyright 2015-2016 Josh Blum <josh@joshknows.com>
  * Copyright 2013 Dimitri Stolnikov <horiz0n@gmx.net>
  *
  * GNU Radio is free software; you can redistribute it and/or modify
@@ -40,6 +40,7 @@
 #include "soapy_source_c.h"
 #include "osmosdr/source.h"
 #include <SoapySDR/Device.hpp>
+#include <SoapySDR/Version.hpp>
 
 using namespace boost::assign;
 
@@ -181,14 +182,14 @@ std::vector<std::string> soapy_source_c::get_gain_names( size_t chan )
 osmosdr::gain_range_t soapy_source_c::get_gain_range( size_t chan )
 {
     SoapySDR::Range r = _device->getGainRange(SOAPY_SDR_RX, chan);
-    return osmosdr::gain_range_t(r.minimum(), r.maximum());
+    return osmosdr::gain_range_t(r.minimum(), r.maximum(), 1.0);
 }
 
 osmosdr::gain_range_t soapy_source_c::get_gain_range( const std::string & name,
                                                 size_t chan )
 {
     SoapySDR::Range r = _device->getGainRange(SOAPY_SDR_RX, chan, name);
-    return osmosdr::gain_range_t(r.minimum(), r.maximum());
+    return osmosdr::gain_range_t(r.minimum(), r.maximum(), 1.0);
 }
 
 bool soapy_source_c::set_gain_mode( bool automatic, size_t chan )
@@ -292,6 +293,9 @@ void soapy_source_c::set_iq_balance( const std::complex<double> &balance, size_t
 
 double soapy_source_c::set_bandwidth( double bandwidth, size_t chan )
 {
+    if ( bandwidth == 0.0 ) /* bandwidth of 0 means automatic filter selection */
+        set_bandwidth(get_sample_rate() * 0.75, chan); /* select narrower filters to prevent aliasing */
+
     _device->setBandwidth(SOAPY_SDR_RX, chan, bandwidth);
     return this->get_bandwidth(chan);
 }
@@ -304,10 +308,17 @@ double soapy_source_c::get_bandwidth( size_t chan )
 osmosdr::freq_range_t soapy_source_c::get_bandwidth_range( size_t chan )
 {
     osmosdr::meta_range_t result;
+    #ifdef SOAPY_SDR_API_HAS_GET_BANDWIDTH_RANGE
+    BOOST_FOREACH(const SoapySDR::Range &r, _device->getBandwidthRange(SOAPY_SDR_RX, 0))
+    {
+        result.push_back(osmosdr::range_t(r.minimum(), r.maximum()));
+    }
+    #else
     BOOST_FOREACH(const double bw, _device->listBandwidths(SOAPY_SDR_RX, 0))
     {
         result.push_back(osmosdr::range_t(bw));
     }
+    #endif
     return result;
 }
 
