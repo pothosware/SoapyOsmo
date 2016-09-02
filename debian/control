@@ -14,10 +14,10 @@ Homepage: https://github.com/pothosware/SoapyOsmo/wiki
 Vcs-Git: https://github.com/pothosware/SoapyOsmo.git
 Vcs-Browser: https://github.com/pothosware/SoapyOsmo
 
-Package: libsoapyosmo0
+Package: libsoapyosmosdr0
 Architecture: any
 Multi-Arch: same
-Pre-Depends: multiarch-support, ${misc:Pre-Depends}
+Pre-Depends: ${misc:Pre-Depends}
 Depends: ${shlibs:Depends}, ${misc:Depends}
 Description: Soapy Osmo - shared library
  Soapy SDR plugins for OsmoSDR devices
@@ -26,7 +26,7 @@ Package: soapysdr0.5-2-module-osmosdr
 Architecture: any
 Multi-Arch: same
 Depends:
-    libsoapyosmo0 (= ${binary:Version}),
+    libsoapyosmosdr0 (= ${binary:Version}),
     ${misc:Pre-Depends},
     ${shlibs:Depends},
     ${misc:Depends}
@@ -46,7 +46,7 @@ Package: soapysdr0.5-2-module-rfspace
 Architecture: any
 Multi-Arch: same
 Depends:
-    libsoapyosmo0 (= ${binary:Version}),
+    libsoapyosmosdr0 (= ${binary:Version}),
     ${misc:Pre-Depends},
     ${shlibs:Depends},
     ${misc:Depends}
@@ -66,7 +66,7 @@ Package: soapysdr0.5-2-module-mirisdr
 Architecture: any
 Multi-Arch: same
 Depends:
-    libsoapyosmo0 (= ${binary:Version}),
+    libsoapyosmosdr0 (= ${binary:Version}),
     ${misc:Pre-Depends},
     ${shlibs:Depends},
     ${misc:Depends}
