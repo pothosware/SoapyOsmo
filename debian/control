@@ -39,7 +39,7 @@ Depends: soapysdr0.5-2-module-osmosdr, ${misc:Depends}
 Description: Soapy Osmo - Osmo SDR module
  Soapy SDR plugins for OsmoSDR devices
  .
- This is an empty dependency package that pulls in the Airspy module
+ This is an empty dependency package that pulls in the OsmoSDR module
  for the default version of libsoapysdr.
 
 Package: soapysdr0.5-2-module-rfspace
@@ -59,7 +59,7 @@ Depends: soapysdr0.5-2-module-rfspace, ${misc:Depends}
 Description: Soapy Osmo - RFSPACE module
  Soapy SDR plugins for OsmoSDR devices
  .
- This is an empty dependency package that pulls in the Airspy module
+ This is an empty dependency package that pulls in the RFSPACE module
  for the default version of libsoapysdr.
 
 Package: soapysdr0.5-2-module-mirisdr
@@ -79,5 +79,5 @@ Depends: soapysdr0.5-2-module-mirisdr, ${misc:Depends}
 Description: Soapy Osmo - Mirics SDR module
  Soapy SDR plugins for OsmoSDR devices
  .
- This is an empty dependency package that pulls in the Airspy module
+ This is an empty dependency package that pulls in the Mirics module
  for the default version of libsoapysdr.
