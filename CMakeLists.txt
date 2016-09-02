@@ -386,7 +386,11 @@ endif(ENABLE_RFSPACE)
 ########################################################################
 # Setup AIRSPY component
 ########################################################################
-GR_REGISTER_COMPONENT("AIRSPY Receiver" ENABLE_AIRSPY LIBAIRSPY_FOUND)
+
+#https://github.com/pothosware/SoapyAirspy/wiki
+option(USE_OSMO_AIRSPY "Use airspy through SoapyAirspy" OFF)
+
+GR_REGISTER_COMPONENT("AIRSPY Receiver" ENABLE_AIRSPY LIBAIRSPY_FOUND;USE_OSMO_AIRSPY)
 if(ENABLE_AIRSPY)
 GR_INCLUDE_SUBDIRECTORY(airspy)
 endif(ENABLE_AIRSPY)
@@ -395,7 +399,7 @@ endif(ENABLE_AIRSPY)
 # Setup Red Pitaya component
 ########################################################################
 
-#https://github.com/pavel-demin/red-pitaya-notes/tree/develop/projects/sdr_transceiver/SoapyRedPitaya
+#https://github.com/pothosware/SoapyRedPitaya/wiki
 option(USE_OSMO_REDPITAYA "Use redpitaya through SoapyRedPitaya" OFF)
 
 GR_REGISTER_COMPONENT("Red Pitaya SDR" ENABLE_REDPITAYA USE_OSMO_REDPITAYA)

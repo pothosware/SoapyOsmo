@@ -1,6 +1,8 @@
 Release 0.2.4 (pending)
 ==========================
 
+- Update debian files for SoapySDR module ABI format
+- Disable SoapyOsmo airspy by default in favor of SoapyAirspy
 - Update internal copy of gr-osmosdr to ae686c46
 
 Release 0.2.3 (2016-04-25)
