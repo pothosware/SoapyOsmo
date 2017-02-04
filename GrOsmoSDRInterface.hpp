@@ -1,5 +1,5 @@
 /*
- * Copyright 2014-2015 Free Software Foundation, Inc.
+ * Copyright 2014-2017 Free Software Foundation, Inc.
  *
  * This file is part of GrOsmoSDR support modules
  *
@@ -21,6 +21,7 @@
 
 #pragma once
 #include <SoapySDR/Device.hpp>
+#include <SoapySDR/Version.hpp>
 #include <boost/shared_ptr.hpp>
 #include "sink_iface.h"
 #include "source_iface.h"
@@ -488,7 +489,11 @@ private:
         SoapySDR::RangeList out;
         for (size_t i = 0; i < ranges.size(); i++)
         {
+            #ifdef SOAPY_SDR_API_HAS_RANGE_TYPE_STEP
+            out.push_back(SoapySDR::Range(ranges[i].start(), ranges[i].stop(), ranges[i].step()));
+            #else
             out.push_back(SoapySDR::Range(ranges[i].start(), ranges[i].stop()));
+            #endif
         }
         return out;
     }
@@ -496,7 +501,11 @@ private:
     template <typename RangeType>
     SoapySDR::Range toRange(const RangeType &ranges) const
     {
+        #ifdef SOAPY_SDR_API_HAS_RANGE_TYPE_STEP
+        return SoapySDR::Range(ranges.start(), ranges.stop(), ranges.step());
+        #else
         return SoapySDR::Range(ranges.start(), ranges.stop());
+        #endif
     }
 
     template <typename RangeType>
