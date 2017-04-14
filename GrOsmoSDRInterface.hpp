@@ -235,6 +235,19 @@ public:
         if (dir == SOAPY_SDR_RX and _source) _source->set_iq_balance(balance, channel);
     }
 
+    void setFrequencyCorrection(const int dir, const size_t channel, const double value)
+    {
+        if (dir == SOAPY_SDR_TX and _sink) _sink->set_freq_corr(value, channel);
+        if (dir == SOAPY_SDR_RX and _source) _source->set_freq_corr(value, channel);
+    }
+
+    double getFrequencyCorrection(const int dir, const size_t channel) const
+    {
+        if (dir == SOAPY_SDR_TX and _sink) return _sink->get_freq_corr(channel);
+        if (dir == SOAPY_SDR_RX and _source) return _source->get_freq_corr(channel);
+        return SoapySDR::Device::getFrequencyCorrection(dir, channel);
+    }
+
     /*******************************************************************
      * Gain support
      ******************************************************************/
