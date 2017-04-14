@@ -1,6 +1,7 @@
 Release 0.2.5 (pending)
 ==========================
 
+- Added getBandwidthRange() and getSampleRateRange()
 - Support for optional gain range step in type conversions
 
 Release 0.2.4 (2016-09-01)
