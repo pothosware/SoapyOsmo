@@ -237,6 +237,7 @@ find_package(LibMiriSDR)
 find_package(LibHackRF)
 find_package(LibAIRSPY)
 find_package(LibbladeRF)
+find_package(LibFreeSRP)
 
 ########################################################################
 # module builder
@@ -406,6 +407,14 @@ GR_REGISTER_COMPONENT("Red Pitaya SDR" ENABLE_REDPITAYA USE_OSMO_REDPITAYA)
 if(ENABLE_REDPITAYA)
 GR_INCLUDE_SUBDIRECTORY(redpitaya)
 endif(ENABLE_REDPITAYA)
+
+########################################################################
+# Setup FreeSRP component
+########################################################################
+GR_REGISTER_COMPONENT("FreeSRP support" ENABLE_FREESRP LIBFREESRP_FOUND)
+if(ENABLE_FREESRP)
+GR_INCLUDE_SUBDIRECTORY(freesrp)
+endif(ENABLE_FREESRP)
 
 ########################################################################
 # Print Summary

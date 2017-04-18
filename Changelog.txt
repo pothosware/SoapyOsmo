@@ -1,6 +1,7 @@
 Release 0.2.5 (pending)
 ==========================
 
+- Add support for FreeSRP
 - Added setFrequencyCorrection() and getFrequencyCorrection()
 - Added getBandwidthRange() and getSampleRateRange()
 - Support for optional gain range step in type conversions
