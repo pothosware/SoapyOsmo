@@ -1,3 +1,9 @@
+soapyosmo (0.2.5-1) unstable; urgency=low
+
+  * Release 0.2.5 (2017-04-29)
+
+ -- Josh Blum <josh@pothosware.com>  Sat, 29 Apr 2017 15:03:27 -0000
+
 soapyosmo (0.2.4) unstable; urgency=low
 
   * Release 0.2.4 (2016-09-01)
