@@ -58,4 +58,3 @@ script:
   - SoapySDRUtil --info
   - SoapySDRUtil --check=miri
   - SoapySDRUtil --check=osmosdr
-  - SoapySDRUtil --check=rfspace
