@@ -379,7 +379,11 @@ endif(ENABLE_BLADERF)
 ########################################################################
 # Setup RFSPACE component
 ########################################################################
-GR_REGISTER_COMPONENT("RFSPACE Receivers" ENABLE_RFSPACE)
+
+#https://github.com/pothosware/SoapyNetSDR/wiki
+option(USE_OSMO_RFSPACE "Use netsdr through SoapyNetSDR" OFF)
+
+GR_REGISTER_COMPONENT("RFSPACE Receivers" ENABLE_RFSPACE;USE_OSMO_RFSPACE)
 if(ENABLE_RFSPACE)
 GR_INCLUDE_SUBDIRECTORY(rfspace)
 endif(ENABLE_RFSPACE)

@@ -1,6 +1,7 @@
 Release 0.2.6 (pending)
 ==========================
 
+- Disable SoapyOsmo rfspace by default in favor of SoapyNetSDR
 - Update internal copy of gr-osmosdr to c653754d
 
 Release 0.2.5 (2017-04-29)
