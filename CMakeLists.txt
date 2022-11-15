@@ -346,7 +346,11 @@ endif(ENABLE_RTL)
 ########################################################################
 # Setup MiriSDR component
 ########################################################################
-GR_REGISTER_COMPONENT("Osmocom MiriSDR" ENABLE_MIRI LIBMIRISDR_FOUND)
+#soapy osmo mirisdr deprecated, use soapy mirisdr
+#https://github.com/ericek111/SoapyMiri
+option(USE_OSMO_MIRISDR "Use MiriSDR through SoapyOsmo" OFF)
+
+GR_REGISTER_COMPONENT("Osmocom MiriSDR" ENABLE_MIRI LIBMIRISDR_FOUND;USE_OSMO_MIRISDR)
 if(ENABLE_MIRI)
 GR_INCLUDE_SUBDIRECTORY(miri)
 endif(ENABLE_MIRI)
