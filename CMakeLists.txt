@@ -20,7 +20,7 @@
 ########################################################################
 # Project setup
 ########################################################################
-cmake_minimum_required(VERSION 2.8.7)
+cmake_minimum_required(VERSION 2.8.12...3.10)
 project(SoapyOsmo CXX C)
 enable_testing()
 
