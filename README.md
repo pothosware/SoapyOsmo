@@ -1,9 +1,5 @@
 # Soapy SDR plugins for OsmoSDR devices
 
-## Build Status
-
-- Travis: [![Travis Build Status](https://travis-ci.org/pothosware/SoapyOsmo.svg?branch=master)](https://travis-ci.org/pothosware/SoapyOsmo)
-
 ## Dependencies
 
 * Boost C++ libraries
