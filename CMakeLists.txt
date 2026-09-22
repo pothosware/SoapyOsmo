@@ -21,6 +21,10 @@
 # Project setup
 ########################################################################
 cmake_minimum_required(VERSION 2.8.12...3.10)
+# Fix behavior of deprecated FindBoost module.
+if(POLICY CMP0167)
+    cmake_policy(SET CMP0167 NEW)
+endif()
 project(SoapyOsmo CXX C)
 
 set(GR_OSMOSDR_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/gr-osmosdr)
