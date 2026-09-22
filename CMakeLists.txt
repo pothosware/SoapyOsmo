@@ -22,7 +22,6 @@
 ########################################################################
 cmake_minimum_required(VERSION 2.8.12...3.10)
 project(SoapyOsmo CXX C)
-enable_testing()
 
 set(GR_OSMOSDR_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/gr-osmosdr)
 
@@ -40,6 +39,14 @@ set(VERSION "0.2.4")
 set(SOVERSION 0)
 
 find_package(SoapySDR NO_MODULE REQUIRED)
+
+if (NOT SOAPYSDR_ROOT)
+    get_filename_component(SOAPYSDR_ROOT "${SoapySDR_INCLUDE_DIRS}/.." ABSOLUTE)
+endif()
+message(STATUS "SoapySDR root directory: ${SOAPYSDR_ROOT}")
+if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
+    set_property(CACHE CMAKE_INSTALL_PREFIX PROPERTY VALUE ${SOAPYSDR_ROOT})
+endif()
 
 ########################################################################
 # Compiler specific setup
