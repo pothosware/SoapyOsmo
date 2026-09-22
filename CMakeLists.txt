@@ -242,7 +242,6 @@ install(TARGETS SoapyOsmoSDR
 ########################################################################
 # Find build dependencies
 ########################################################################
-INCLUDE(FindPkgConfig)
 set(FPHSA_NAME_MISMATCHED ON)
 find_package(LibOsmoSDR)
 find_package(LibRTLSDR)

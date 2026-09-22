@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_LIBRTLSDR librtlsdr)
 
 find_path(LIBRTLSDR_INCLUDE_DIRS NAMES rtl-sdr.h

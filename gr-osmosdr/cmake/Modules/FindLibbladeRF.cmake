@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_LIBBLADERF libbladeRF)
 
 find_path(LIBBLADERF_INCLUDE_DIRS NAMES libbladeRF.h

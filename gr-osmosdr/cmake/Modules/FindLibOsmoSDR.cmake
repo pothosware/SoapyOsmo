@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_LIBOSMOSDR libosmosdr)
 
 find_path(LIBOSMOSDR_INCLUDE_DIRS NAMES osmosdr.h

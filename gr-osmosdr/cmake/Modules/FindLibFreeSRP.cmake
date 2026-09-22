@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_LIBFREESRP libfreesrp)
 
 find_path(LIBFREESRP_INCLUDE_DIRS NAMES freesrp.hpp

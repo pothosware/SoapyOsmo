@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_GNURADIO_IQBALANCE gnuradio-iqbalance)
 
 FIND_PATH(

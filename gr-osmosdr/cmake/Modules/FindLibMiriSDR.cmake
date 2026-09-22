@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_LIBMIRISDR libmirisdr)
 
 find_path(LIBMIRISDR_INCLUDE_DIRS NAMES mirisdr.h

@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_LIBAIRSPY libairspy)
 
 FIND_PATH(LIBAIRSPY_INCLUDE_DIRS NAMES libairspy/airspy.h

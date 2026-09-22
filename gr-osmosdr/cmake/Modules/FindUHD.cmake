@@ -2,7 +2,7 @@
 # Find the library for the USRP Hardware Driver
 ########################################################################
 
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_UHD uhd)
 
 FIND_PATH(

@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_LIBHACKRF libhackrf)
 
 FIND_PATH(LIBHACKRF_INCLUDE_DIRS NAMES libhackrf/hackrf.h

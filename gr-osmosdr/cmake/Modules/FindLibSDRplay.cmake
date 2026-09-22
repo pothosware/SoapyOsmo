@@ -1,4 +1,4 @@
-INCLUDE(FindPkgConfig)
+find_package(PkgConfig REQUIRED)
 PKG_CHECK_MODULES(PC_LIBSDRPLAY libsdrplay)
 
 find_path(LIBSDRPLAY_INCLUDE_DIRS NAMES mirsdrapi-rsp.h
