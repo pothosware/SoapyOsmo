@@ -1,6 +1,8 @@
-Release 0.2.6 (pending)
+Release 0.2.6 (2016-10-10)
 ==========================
 
+- Minor fixes
+- Updated CMake builds
 - Disable SoapyOsmo rfspace by default in favor of SoapyNetSDR
 - Update internal copy of gr-osmosdr to c653754d
 
